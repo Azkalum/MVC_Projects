@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+		Nenhum desenvolvedor encontrado</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div class="card mb-3">
+		<div class="card-header">
+			<p class="text-primary">Filtrar Desenvolvedor</p>
+		</div>
+	    <div class="card-body"> 
+	    <form method="GET">
+	             <div class="form-group mb-3">
+					<label for="nome">Nome:</label> 
+					<input
+						class="form-control" type="text" name="nome" th:value="${nome}"></input>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">4 Letras:</label> 
+					<input
+						class="form-control" type="text" name="quatroLetras" th:value="${quatroLetras}"></input>
+				</div>
+				<button type="submit" class="btn btn-primary">Pesquisar Desenvolvedor</button>  
+	    </form>
+	    </div>
+	</div>	    
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>4 Letras</th>
+					<th>E-mail</th>
+					<th>Salário Mensal</th>
+					<th>Linguagem</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="desenvolvedor : ${lista}">
+					<td th:text="${desenvolvedor.id}"></td>
+					<td th:text="${desenvolvedor.nome}"></td>
+					<td th:text="${desenvolvedor.quatroLetras}"></td>
+					<td th:text="${desenvolvedor.email}"></td>
+					<td
+						th:text="'R$' + ${#numbers.formatDecimal(desenvolvedor.salarioMensal, 0, 'POINT', 2, 'COMMA')}"></td>
+					<td th:text="${desenvolvedor.linguagem.nome}"></td>
+					<td><a class="btn btn-primary btn-sm"
+						th:href="@{/desenvolvedor/editar(id=${desenvolvedor.id})}">Editar</a>
+						<a class="btn btn-primary btn-sm"
+						th:href="@{/desenvolvedor/excluir(id=${desenvolvedor.id})}"
+						onclick="return confirm('Você realmente deseja excluir esse desenvolvedor?')">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="htpp://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastrar Pessoa</title>
+</head>
+<body>
+<form method="POST" th:action="@{/person}" th:object="${person}">
+       <input type="hidden" th:field="*{id}"></input>
+Nome : <input type="text" th:field="*{name}"><input><br>
+Idade : <input type="text" th:field="*{age}"><input><br>
+Status : <select th:field="*{status}">
+         <option value="1">Ativo</option>
+         <option value="0">Inativo</option>
+      </select><br>
+  <button type="submit">Gravar Pessoa</button>
+</form>
+</body>
+</html>

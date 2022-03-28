@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="htpp://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pessoa</title>
+</head>
+<body>
+<div th:if="${message != null}">
+    <h1 th:text="${message}"></h1>
+</div>
+<div th:if="${person != null}">
+    Id:<span th:text="${person.id}"></span><br>
+    Nome:<span th:text="${person.name}"></span><br>
+    Idade:<span th:text="${person.age}"></span><br>
+    Status:<span th:text="${person.status ? 'Ativo' : 'Inativo'}"></span><br>
+</div>
+</body>
+</html>
